@@ -244,6 +244,8 @@ MonoBehaviour:
   PlayerMesh: {fileID: 517118656}
   Playercam: {fileID: 963194227}
   JumpForce: 12
+  DistBetweenFingers: 0.1
+  DistBetweenFingersY: 500
 --- !u!54 &517118663
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -9,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     public GameObject PlayerMesh;
     public Camera Playercam;
     public float JumpForce;
+    public float DistBetweenFingers = 0f;
+    public float DistBetweenFingersY = 0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,21 +20,39 @@ public class PlayerMovement : MonoBehaviour
     }
     float Offset = 0;
     bool CanJump = false;
+    Vector2 StartPos;
+    Vector2 EndPos;
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.A))
+        float DistanceOfPointsX = 0f;
+        float DistanceOfPointsY = 0f;
+        if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            Offset -= 5;
+            StartPos = Input.GetTouch(0).position;
         }
-        else if(Input.GetKeyUp(KeyCode.D))
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
         {
-            Offset += 5;
+            EndPos = Input.GetTouch(0).position;
+            DistanceOfPointsX = StartPos.normalized.x - EndPos.normalized.x;
+            DistanceOfPointsY = StartPos.y - EndPos.y; 
+            Debug.Log(StartPos);
+            Debug.Log(EndPos);
         }
-        if (Input.GetButtonDown("Jump") && CanJump)
+
+        if (DistanceOfPointsY < DistBetweenFingersY * -1 && CanJump)
         {
             PlayerMesh.GetComponent<Rigidbody>().velocity = Vector3.up * JumpForce;
             CanJump = false;
+            DistanceOfPointsX = 0f;
+        }
+        if (DistanceOfPointsX < DistBetweenFingers * -1)
+        {
+            Offset += 5;
+        }
+        if(DistanceOfPointsX > DistBetweenFingers)
+        {
+            Offset -= 5;
         }
         Offset = Mathf.Clamp(Offset, -5, 5);
         if(PlayerMesh.GetComponent<Rigidbody>().velocity.y > 0)

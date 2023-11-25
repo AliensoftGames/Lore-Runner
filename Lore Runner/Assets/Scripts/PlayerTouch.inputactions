@@ -1,0 +1,54 @@
+{
+    "name": "PlayerTouch",
+    "maps": [
+        {
+            "name": "Touch",
+            "id": "69d6c5eb-878f-4964-a809-8f310fd12e6b",
+            "actions": [
+                {
+                    "name": "FisrtContact",
+                    "type": "PassThrough",
+                    "id": "54243e49-8baa-4677-b800-f6cc71c21d85",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "FirstPos",
+                    "type": "PassThrough",
+                    "id": "76383a99-abba-4762-a2c7-a071baf04cea",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "7cccd33f-6036-42ce-9e92-fdd1cae38051",
+                    "path": "<Touchscreen>/primaryTouch/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FisrtContact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2b2f901f-d89c-4c41-a7d7-19636119c96b",
+                    "path": "<Touchscreen>/primaryTouch/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "FirstPos",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
